@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ECOSS – Economics Students Society | TU Kirtipur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --gold:#c9a84c;
+    --gold-light:#e8c97a;
+    --gold-dim:#7a6330;
+    --deep:#0b0e14;
+    --dark:#111621;
+    --card:#161c28;
+    --card2:#1c2335;
+    --border:rgba(201,168,76,0.18);
+    --text:#e8e4da;
+    --muted:#8b8a85;
+    --accent:#4c8ec9;
+    --accent2:#4cc9a8;
+    --red:#e05c5c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--deep);
+    color:var(--text);
+    font-family:'DM Sans',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+
+  /* ── BACKGROUND TEXTURE ── */
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(201,168,76,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(76,142,201,0.06) 0%, transparent 60%);
+    pointer-events:none;z-index:0;
+  }
+
+  /* ── NAV ── */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(11,14,20,0.92);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+    padding:0 2rem;
+    display:flex;align-items:center;justify-content:space-between;
+    height:60px;
+  }
+  .nav-logo{
+    font-family:'Playfair Display',serif;
+    font-size:1.3rem;font-weight:900;
+    color:var(--gold);letter-spacing:1px;
+  }
+  .nav-logo span{color:var(--text);font-weight:400;font-size:0.85rem;display:block;letter-spacing:2px;font-family:'DM Sans',sans-serif;margin-top:-2px;}
+  .nav-links{display:flex;gap:1.5rem;list-style:none;}
+  .nav-links a{
+    color:var(--muted);text-decoration:none;font-size:0.85rem;
+    font-weight:500;letter-spacing:0.5px;transition:color 0.2s;
+  }
+  .nav-links a:hover{color:var(--gold)}
+  .nav-wa{
+    background:var(--gold);color:var(--deep);
+    padding:0.4rem 1rem;border-radius:4px;
+    font-weight:600;font-size:0.8rem;text-decoration:none;
+    transition:background 0.2s;white-space:nowrap;
+  }
+  .nav-wa:hover{background:var(--gold-light)}
+
+  /* ── HERO ── */
+  .hero{
+    position:relative;z-index:1;
+    text-align:center;
+    padding:5rem 2rem 3.5rem;
+    border-bottom:1px solid var(--border);
+  }
+  .hero-badge{
+    display:inline-block;
+    border:1px solid var(--gold-dim);
+    color:var(--gold);
+    font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;
+    padding:0.3rem 1rem;border-radius:2px;
+    margin-bottom:1.5rem;
+    font-family:'DM Mono',monospace;
+  }
+  .hero h1{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.2rem,5vw,3.8rem);
+    font-weight:900;line-height:1.1;
+    color:#fff;
+    margin-bottom:0.5rem;
+  }
+  .hero h1 span{color:var(--gold);}
+  .hero-sub{
+    color:var(--muted);font-size:0.95rem;
+    margin-bottom:2rem;letter-spacing:0.3px;
+  }
+  .hero-meta{
+    display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
+    font-family:'DM Mono',monospace;font-size:0.75rem;
+    color:var(--muted);
+  }
+  .hero-meta span{color:var(--gold-light);}
+
+  /* ── ALERT BANNER ── */
+  .alert-banner{
+    position:relative;z-index:1;
+    margin:1.5rem 2rem;
+    background:linear-gradient(135deg,rgba(224,92,92,0.12),rgba(224,92,92,0.05));
+    border:1px solid rgba(224,92,92,0.35);
+    border-radius:8px;padding:1rem 1.5rem;
+    display:flex;align-items:flex-start;gap:1rem;
+  }
+  .alert-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px;}
+  .alert-content h4{color:var(--red);font-size:0.9rem;font-weight:600;margin-bottom:0.3rem;}
+  .alert-content p{color:var(--text);font-size:0.85rem;line-height:1.5;}
+
+  /* ── SECTIONS ── */
+  main{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 1.5rem 4rem;}
+  section{margin-bottom:3.5rem;}
+  .section-header{
+    display:flex;align-items:center;gap:1rem;
+    margin-bottom:1.5rem;
+    padding-bottom:0.75rem;
+    border-bottom:1px solid var(--border);
+  }
+  .section-tag{
+    font-family:'DM Mono',monospace;font-size:0.7rem;
+    letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);border:1px solid var(--gold-dim);
+    padding:0.2rem 0.6rem;border-radius:2px;
+  }
+  .section-title{
+    font-family:'Playfair Display',serif;
+    font-size:1.5rem;font-weight:700;color:#fff;
+  }
+
+  /* ── NOTICE CARDS ── */
+  .notices-grid{display:grid;gap:1rem;}
+  .notice-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:8px;padding:1.25rem 1.5rem;
+    display:flex;gap:1.25rem;align-items:flex-start;
+    transition:border-color 0.2s,transform 0.2s;
+  }
+  .notice-card:hover{border-color:var(--gold-dim);transform:translateY(-2px);}
+  .notice-card.urgent{border-color:rgba(224,92,92,0.4);}
+  .notice-card.urgent:hover{border-color:var(--red);}
+  .notice-dot{
+    width:10px;height:10px;border-radius:50%;
+    background:var(--gold);flex-shrink:0;margin-top:5px;
+  }
+  .notice-card.urgent .notice-dot{background:var(--red);}
+  .notice-body h4{font-size:0.95rem;font-weight:600;color:#fff;margin-bottom:0.3rem;}
+  .notice-body p{color:var(--muted);font-size:0.85rem;line-height:1.5;}
+  .notice-meta{
+    display:flex;gap:0.75rem;margin-top:0.6rem;flex-wrap:wrap;
+  }
+  .notice-tag{
+    font-size:0.7rem;font-family:'DM Mono',monospace;
+    background:rgba(201,168,76,0.1);color:var(--gold);
+    padding:0.15rem 0.5rem;border-radius:2px;border:1px solid var(--gold-dim);
+  }
+  .notice-tag.red{background:rgba(224,92,92,0.1);color:var(--red);border-color:rgba(224,92,92,0.3);}
+  .notice-tag.blue{background:rgba(76,142,201,0.1);color:var(--accent);border-color:rgba(76,142,201,0.3);}
+
+  /* ── SCHEDULE ── */
+  .schedule-tabs{display:flex;gap:0.5rem;margin-bottom:1.25rem;flex-wrap:wrap;}
+  .tab-btn{
+    background:var(--card);border:1px solid var(--border);
+    color:var(--muted);padding:0.45rem 1rem;border-radius:4px;
+    font-size:0.82rem;font-weight:500;cursor:pointer;
+    transition:all 0.2s;font-family:'DM Sans',sans-serif;
+  }
+  .tab-btn.active{background:var(--gold);color:var(--deep);border-color:var(--gold);}
+  .tab-btn:hover:not(.active){border-color:var(--gold-dim);color:var(--gold);}
+
+  .schedule-table-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border);}
+  table{width:100%;border-collapse:collapse;font-size:0.82rem;}
+  thead tr{background:var(--card2);}
+  th{
+    padding:0.75rem 1rem;text-align:left;
+    color:var(--gold);font-weight:600;
+    font-family:'DM Mono',monospace;font-size:0.72rem;
+    letter-spacing:1px;text-transform:uppercase;
+    border-bottom:1px solid var(--border);
+  }
+  td{
+    padding:0.7rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);
+    color:var(--text);vertical-align:top;
+  }
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:rgba(201,168,76,0.03);}
+  .cell-subject{font-weight:600;color:#fff;font-size:0.85rem;}
+  .cell-teacher{color:var(--muted);font-size:0.78rem;font-family:'DM Mono',monospace;}
+  .day-badge{
+    display:inline-block;background:var(--card2);
+    color:var(--gold);padding:0.15rem 0.5rem;border-radius:3px;
+    font-size:0.7rem;font-family:'DM Mono',monospace;
+    font-weight:600;
+  }
+  .break-cell{
+    color:var(--muted);font-style:italic;font-size:0.78rem;
+    text-align:center;
+  }
+  .cancelled{
+    text-decoration:line-through;color:var(--red);opacity:0.7;
+    font-size:0.78rem;
+  }
+  .cancelled-badge{
+    display:inline-block;background:rgba(224,92,92,0.12);
+    color:var(--red);padding:0.1rem 0.45rem;border-radius:2px;
+    font-size:0.68rem;border:1px solid rgba(224,92,92,0.3);margin-left:0.4rem;
+  }
+  .wed-row td{background:rgba(76,196,168,0.04);color:var(--muted);font-style:italic;}
+
+  /* ── RESOURCES ── */
+  .res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;}
+  .res-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:8px;padding:1.25rem;
+    transition:all 0.2s;text-decoration:none;display:block;
+  }
+  .res-card:hover{border-color:var(--gold-dim);transform:translateY(-3px);}
+  .res-icon{font-size:1.8rem;margin-bottom:0.75rem;}
+  .res-card h4{color:#fff;font-size:0.95rem;font-weight:600;margin-bottom:0.3rem;}
+  .res-card p{color:var(--muted);font-size:0.82rem;line-height:1.4;}
+  .res-link{
+    display:inline-flex;align-items:center;gap:0.35rem;
+    margin-top:0.75rem;color:var(--gold);font-size:0.78rem;
+    font-weight:500;
+  }
+  .res-link::after{content:'→';}
+
+  /* ── TEAM ── */
+  .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem;}
+  .team-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:8px;padding:1.1rem;text-align:center;
+    transition:all 0.2s;
+  }
+  .team-card:hover{border-color:var(--gold-dim);}
+  .team-avatar{
+    width:52px;height:52px;border-radius:50%;
+    background:linear-gradient(135deg,var(--gold-dim),var(--deep));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);
+    margin:0 auto 0.6rem;border:1px solid var(--border);
+  }
+  .team-card h5{color:#fff;font-size:0.88rem;font-weight:600;margin-bottom:0.2rem;}
+  .team-card p{color:var(--gold);font-size:0.72rem;font-family:'DM Mono',monospace;letter-spacing:0.5px;}
+  .team-card.tbd{opacity:0.45;}
+
+  /* ── QUICK INFO ── */
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+  .info-box{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:8px;padding:1.1rem;
+  }
+  .info-box h5{color:var(--muted);font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:0.5rem;}
+  .info-box p{color:#fff;font-size:0.92rem;font-weight:500;}
+  .info-box span{color:var(--gold);}
+
+  /* ── FOOTER ── */
+  footer{
+    position:relative;z-index:1;
+    border-top:1px solid var(--border);
+    padding:2rem;text-align:center;
+    color:var(--muted);font-size:0.78rem;
+  }
+  footer a{color:var(--gold);text-decoration:none;}
+
+  /* ── HAMBURGER ── */
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+  .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s;}
+  .mobile-menu{
+    display:none;position:fixed;inset:60px 0 0 0;
+    background:rgba(11,14,20,0.98);z-index:99;
+    flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{color:var(--text);text-decoration:none;font-size:1.2rem;font-weight:500;}
+
+  @media(max-width:700px){
+    .nav-links,.nav-wa{display:none;}
+    .hamburger{display:flex;}
+    .hero{padding:3rem 1.5rem 2.5rem;}
+    th,td{padding:0.6rem 0.65rem;}
+  }
+
+  /* ── ANIM ── */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .hero{animation:fadeUp 0.7s ease both;}
+  .alert-banner{animation:fadeUp 0.7s 0.15s ease both;}
+  section{animation:fadeUp 0.7s 0.2s ease both;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    ECOSS
+    <span>ECONOMICS STUDENTS SOCIETY · TU KIRTIPUR</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#notices">Notices</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#resources">Resources</a></li>
+    <li><a href="#team">Team</a></li>
+  </ul>
+  <a class="nav-wa" href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" target="_blank">📲 Join WhatsApp</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#notices" onclick="toggleMenu()">Notices</a>
+  <a href="#schedule" onclick="toggleMenu()">Schedule</a>
+  <a href="#resources" onclick="toggleMenu()">Resources</a>
+  <a href="#team" onclick="toggleMenu()">Team</a>
+  <a href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" target="_blank">📲 Join WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Academic Year 2082 · First Semester</div>
+  <h1>Your <span>Economics</span><br/>Hub at TU</h1>
+  <p class="hero-sub">Notices · Class Schedules · Study Resources · Daily Notes — all in one place.</p>
+  <div class="hero-meta">
+    <div>Institution: <span>Tribhuvan University</span></div>
+    <div>Department: <span>Central Dept. of Economics, Kirtipur</span></div>
+    <div>Active Semesters: <span>1st &amp; 3rd Sem</span></div>
+  </div>
+</div>
+
+<!-- ALERT BANNER – Today's Update -->
+<div class="alert-banner">
+  <div class="alert-icon">⚠️</div>
+  <div class="alert-content">
+    <h4>TODAY'S CLASS UPDATE (Aaj ko Suchana)</h4>
+    <p>
+      <strong>Microeconomics I – CANCELLED today</strong> for both Section A and Section B.<br/>
+      <strong>Section A:</strong> Classes will begin from <strong>12:00 PM</strong> today (instead of 11:00 AM).<br/>
+      Section B starts as per regular schedule.
+    </p>
+  </div>
+</div>
+
+<main>
+
+  <!-- NOTICES -->
+  <section id="notices">
+    <div class="section-header">
+      <div class="section-tag">📢 Latest</div>
+      <h2 class="section-title">Notices &amp; Announcements</h2>
+    </div>
+    <div class="notices-grid">
+
+      <!-- Library Notice -->
+      <div class="notice-card urgent">
+        <div class="notice-dot"></div>
+        <div class="notice-body">
+          <h4>📚 Library Orientation Program – MANDATORY ATTENDANCE</h4>
+          <p>
+            TU Central Library is organizing a <strong>Library Orientation Training</strong> for all First Semester (MA/MBS) students of the Department of Economics for Academic Year 2082/083 (2025).<br/><br/>
+            📅 <strong>Date:</strong> Falgun 25, 2082 (Tomorrow) — <em>Wednesday</em><br/>
+            ⏰ <strong>Time:</strong> From 10:30 AM onwards<br/>
+            📍 <strong>Venue:</strong> TU Central Library, Kirtipur<br/><br/>
+            All students must attend. This is mandatory as per the department notice issued by Prof. Dr. Ram Prasad Gyanwaly, Head.
+          </p>
+          <div class="notice-meta">
+            <span class="notice-tag red">URGENT</span>
+            <span class="notice-tag">MANDATORY</span>
+            <span class="notice-tag blue">Tomorrow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Today's update -->
+      <div class="notice-card urgent">
+        <div class="notice-dot"></div>
+        <div class="notice-body">
+          <h4>📋 Today's Class Change – Micro I Cancelled</h4>
+          <p>
+            Microeconomics I class is cancelled for <strong>today</strong> for both sections.<br/>
+            Section A students: first class starts at <strong>12:00 PM</strong> (Macro I).
+          </p>
+          <div class="notice-meta">
+            <span class="notice-tag red">TODAY</span>
+            <span class="notice-tag">CLASS UPDATE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- General -->
+      <div class="notice-card">
+        <div class="notice-dot"></div>
+        <div class="notice-body">
+          <h4>🗂️ Daily Class Notes Now Available on Google Drive</h4>
+          <p>
+            ECOSS is uploading daily class notes on the same day classes are held. Check the Resources section below to access notes for your section. Notes for other semesters coming soon.
+          </p>
+          <div class="notice-meta">
+            <span class="notice-tag">ECOSS INITIATIVE</span>
+            <span class="notice-tag blue">1st Sem</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section id="schedule">
+    <div class="section-header">
+      <div class="section-tag">🗓️ Routine</div>
+      <h2 class="section-title">Class Schedule – 1st Semester</h2>
+    </div>
+    <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1rem;">
+      Effective from Magh 25, 2082 &nbsp;·&nbsp; Section A: Odd Roll Numbers (Room #116) &nbsp;·&nbsp; Section B: Even Roll Numbers (Room #3)
+    </p>
+
+    <div class="schedule-tabs">
+      <button class="tab-btn active" onclick="showTab('secA',this)">Section A</button>
+      <button class="tab-btn" onclick="showTab('secB',this)">Section B</button>
+    </div>
+
+    <!-- SECTION A -->
+    <div id="secA" class="schedule-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>11:00–12:00</th>
+            <th>12:00–13:00</th>
+            <th>13:00–13:30</th>
+            <th>13:30–14:30</th>
+            <th>14:30–15:30</th>
+            <th>15:30–16:30</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="day-badge">SUN</span></td>
+            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">RBT</div></td>
+            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">BRK</div></td>
+            <td class="break-cell" rowspan="6">B<br/>R<br/>E<br/>A<br/>K</td>
+            <td><div class="cell-subject">Math.Eco</div><div class="cell-teacher">DBA</div></td>
+            <td><div class="cell-subject">Dev. Eco I</div><div class="cell-teacher">DA</div></td>
+            <td><div class="cell-subject">HET</div><div class="cell-teacher">SB</div></td>
+          </tr>
+          <tr>
+            <td><span class="day-badge">MON</span></td>
+            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">PN</div></td>
+            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">SRA</div></td>
+            <td><div class="cell-subject">Math. Eco</div><div class="cell-teacher">NBA</div></td>
+            <td><div class="cell-subject">Dev. Econ I</div><div class="cell-teacher">KRA</div></td>
+            <td><div class="cell-subject">HET</div><div class="cell-teacher">RCP</div></td>
+          </tr>
+          <tr>
+            <td><span class="day-badge">TUE</span></td>
+            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">PN</div></td>
+            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">RPG</div></td>
+            <td><div class="cell-subject">Meth.Eco</div><div class="cell-teacher">DBA</div></td>
+            <td><div class="cell-subject">HET</div><div class="cell-teacher">RCP</div></td>
+            <td><div class="cell-subject">Dev.Eco</div><div class="cell-teacher">NKR</div></td>
+          </tr>
+          <tr class="wed-row">
+            <td><span class="day-badge">WED</span></td>
+            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
+          </tr>
+          <tr class="wed-row">
+            <td><span class="day-badge">THU</span></td>
+            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
+          </tr>
+          <tr class="wed-row">
+            <td><span class="day-badge">FRI</span></td>
+            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION B -->
+    <div id="secB" class="schedule-table-wrap" style="display:none;">
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>11:00–12:00</th>
+            <th>12:00–13:00</th>
+            <th>13:00–13:30</th>
+            <th>13:30–14:30</th>
+            <th>14:30–15:30</th>
+            <th>15:30–16:30</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="day-badge">SUN</span></td>
+            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">BRK</div></td>
+            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">RBT</div></td>
+            <td class="break-cell" rowspan="6">B<br/>R<br/>E<br/>A<br/>K</td>
+            <td><div class="cell-subject">Dev. Eco I</div><div class="cell-teacher">DA</div></td>
+            <td><div class="cell-subject">Math.Eco</div><div class="cell-teacher">DBA</div></td>
+            <td><div class="cell-subject">HET</div><div class="cell-teacher">RCP</div></td>
+          </tr>
+          <tr>
+            <td><span class="day-badge">MON</span></td>
+            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">SRA</div></td>
+            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">PN</div></td>
+            <td><div class="cell-subject">Dev. Econ I</div><div class="cell-teacher">KRA</div></td>
+            <td><div class="cell-subject">Math.Eco</div><div class="cell-teacher">NBA</div></td>
+            <td><div class="cell-subject">HET</div><div class="cell-teacher">SB</div></td>
+          </tr>
+          <tr>
+            <td><span class="day-badge">TUE</span></td>
+            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">RPG</div></td>
+            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">PN</div></td>
+            <td><div class="cell-subject">Dev.Eco I</div><div class="cell-teacher">SA</div></td>
+            <td><div class="cell-subject">Meth.Eco</div><div class="cell-teacher">DBA</div></td>
+            <td><div class="cell-subject">HET</div><div class="cell-teacher">RCP</div></td>
+          </tr>
+          <tr class="wed-row">
+            <td><span class="day-badge">WED</span></td>
+            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
+          </tr>
+          <tr class="wed-row">
+            <td><span class="day-badge">THU</span></td>
+            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
+          </tr>
+          <tr class="wed-row">
+            <td><span class="day-badge">FRI</span></td>
+            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Faculty Key -->
+    <div style="margin-top:1.25rem;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem;">
+      <p style="color:var(--gold);font-size:0.72rem;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.75rem;">Faculty Key</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;">
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">BRK</b> – Baburam Karki</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">DBA</b> – Dr. Dipak Bahadur Adhikari</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">KRA</b> – Prof.Dr. Krishna R Acharya</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">SB</b> – Prof.Dr. Shiva Bhusal</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">RCP</b> – Dr. Ramesh Chandra Paudel</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">NKR</b> – Dr. Nirmal K. Raut</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">RBT</b> – Dr. Resham Bahadur Thapa</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">PN</b> – Dr. Pramshu Nepal</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">DA</b> – Damodar Adhikari</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">SA</b> – Prof.Dr. Sanjay Acharya</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">SRA</b> – Prof.Dr. Shiva R Adhikari</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">NBA</b> – Naveen Adhikari</span>
+        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">RPG</b> – Prof.Dr. Ram Prasad Gyanwaly</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section id="resources">
+    <div class="section-header">
+      <div class="section-tag">📁 Drive</div>
+      <h2 class="section-title">Study Resources &amp; Notes</h2>
+    </div>
+    <div class="res-grid">
+      <a class="res-card" href="https://drive.google.com/drive/folders/1TikFHWWUM8_8QjYA2St8rAo3MpXIfNRY" target="_blank">
+        <div class="res-icon">📂</div>
+        <h4>1st Sem – Section B Notes</h4>
+        <p>Daily class notes for Section B (Even Roll Numbers). Updated same-day after class.</p>
+        <div class="res-link">Open Google Drive</div>
+      </a>
+      <a class="res-card" href="https://drive.google.com/drive/folders/1FCQ5mj0k0T1iDP4WLaT3l7FwCCnHqT72" target="_blank">
+        <div class="res-icon">📂</div>
+        <h4>1st Sem – Section A Notes</h4>
+        <p>Daily class notes for Section A (Odd Roll Numbers). Updated same-day after class.</p>
+        <div class="res-link">Open Google Drive</div>
+      </a>
+      <a class="res-card" href="https://drive.google.com/drive/folders/1-729Gowt5KVHL1Wwcx17E-rPxDqZdfP7" target="_blank">
+        <div class="res-icon">🗄️</div>
+        <h4>Master Drive – All Semesters</h4>
+        <p>Central repository for all semester notes. Notes for other semesters coming soon.</p>
+        <div class="res-link">Open Master Drive</div>
+      </a>
+      <div class="res-card" style="opacity:0.5;cursor:default;">
+        <div class="res-icon">🔒</div>
+        <h4>3rd Sem Notes</h4>
+        <p>Notes for 3rd Semester (Academic Year 2080). Coming soon via Master Drive.</p>
+        <div class="res-link" style="color:var(--muted);">Coming Soon</div>
+      </div>
+    </div>
+
+    <div style="margin-top:1rem;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;display:flex;gap:0.75rem;align-items:center;">
+      <span style="font-size:1.2rem;">💡</span>
+      <p style="color:var(--muted);font-size:0.83rem;line-height:1.5;">
+        ECOSS uploads class notes on the <strong style="color:var(--text)">same day</strong> classes are held. If you missed a class, check Google Drive or ask in the <a href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" style="color:var(--gold)">WhatsApp group</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- QUICK INFO -->
+  <section>
+    <div class="section-header">
+      <div class="section-tag">ℹ️ Info</div>
+      <h2 class="section-title">Quick Info</h2>
+    </div>
+    <div class="info-grid">
+      <div class="info-box">
+        <h5>Active Semesters</h5>
+        <p><span>1st Sem</span> (2082) &amp; <span>3rd Sem</span> (2080)</p>
+      </div>
+      <div class="info-box">
+        <h5>Section A Room</h5>
+        <p>Room <span>#116</span> · Odd Roll Nos.</p>
+      </div>
+      <div class="info-box">
+        <h5>Section B Room</h5>
+        <p>Room <span>#3</span> · Even Roll Nos.</p>
+      </div>
+      <div class="info-box">
+        <h5>Class Timings</h5>
+        <p><span>11:00 AM – 4:30 PM</span></p>
+      </div>
+      <div class="info-box">
+        <h5>Department Head</h5>
+        <p>Prof. Dr. Ram Prasad Gyanwaly</p>
+      </div>
+      <div class="info-box">
+        <h5>Contact ECOSS</h5>
+        <p><a href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" style="color:var(--gold);text-decoration:none;">WhatsApp Group →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <div class="section-header">
+      <div class="section-tag">👥 ECOSS</div>
+      <h2 class="section-title">Our Team</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card tbd">
+        <div class="team-avatar">?</div>
+        <h5>President</h5>
+        <p>To Be Elected</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">K</div>
+        <h5>Kapil Joshi</h5>
+        <p>Vice President</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">P</div>
+        <h5>Prakrity Chaulagai</h5>
+        <p>Secretary</p>
+      </div>
+      <div class="team-card tbd">
+        <div class="team-avatar">?</div>
+        <h5>Vice Secretary</h5>
+        <p>To Be Elected</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">D</div>
+        <h5>Durga Ghimire</h5>
+        <p>Treasurer</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">R</div>
+        <h5>Rijohn Shrestha</h5>
+        <p>Joint Secretary</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">P</div>
+        <h5>Piyush Bohara</h5>
+        <p>Member</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">B</div>
+        <h5>Beeja Bohara</h5>
+        <p>Member</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">T</div>
+        <h5>Tek Prasad Regmi</h5>
+        <p>Member</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">R</div>
+        <h5>Radha Kharel</h5>
+        <p>Member</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">D</div>
+        <h5>Dinesh Pant</h5>
+        <p>Member</p>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">S</div>
+        <h5>Sandeep Bhandari</h5>
+        <p>Member</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p style="margin-bottom:0.4rem;">
+    <strong style="color:var(--gold)">ECOSS</strong> — Economics Students Society &nbsp;·&nbsp; Central Department of Economics, Tribhuvan University, Kirtipur
+  </p>
+  <p>
+    <a href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" target="_blank">📲 WhatsApp Group</a>
+    &nbsp;·&nbsp;
+    <a href="https://drive.google.com/drive/folders/1-729Gowt5KVHL1Wwcx17E-rPxDqZdfP7" target="_blank">📁 Master Notes Drive</a>
+    &nbsp;·&nbsp;
+    <a href="http://www.cedecontu.edu.np" target="_blank">🌐 Department Website</a>
+  </p>
+  <p style="margin-top:0.75rem;font-size:0.72rem;">Built with ❤️ by ECOSS for students of TU Economics</p>
+</footer>
+
+<script>
+  function showTab(id,btn){
+    document.getElementById('secA').style.display='none';
+    document.getElementById('secB').style.display='none';
+    document.getElementById(id).style.display='block';
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  function toggleMenu(){
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+</script>
+</body>
+</html>
