@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -7,283 +7,129 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-  :root{
-    --gold:#c9a84c;
-    --gold-light:#e8c97a;
-    --gold-dim:#7a6330;
-    --deep:#0b0e14;
-    --dark:#111621;
-    --card:#161c28;
-    --card2:#1c2335;
-    --border:rgba(201,168,76,0.18);
-    --text:#e8e4da;
-    --muted:#8b8a85;
-    --accent:#4c8ec9;
-    --accent2:#4cc9a8;
-    --red:#e05c5c;
+  [data-theme="dark"]{
+    --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#7a6330;
+    --deep:#0b0e14;--dark:#111621;--card:#161c28;--card2:#1c2335;
+    --border:rgba(201,168,76,0.18);--text:#e8e4da;--muted:#8b8a85;
+    --accent:#4c8ec9;--red:#e05c5c;--nav-bg:rgba(11,14,20,0.92);
+    --section-title:#fff;--hero-h1:#fff;
+    --bg1:rgba(201,168,76,0.07);--bg2:rgba(76,142,201,0.06);
+    --table-hover:rgba(201,168,76,0.03);--td-border:rgba(255,255,255,0.04);
+  }
+  [data-theme="light"]{
+    --gold:#8a5e10;--gold-light:#6b4a0e;--gold-dim:#c9973a;
+    --deep:#f4f1e8;--dark:#ebe6d8;--card:#ffffff;--card2:#f0ebe0;
+    --border:rgba(138,94,16,0.18);--text:#231e12;--muted:#6b6050;
+    --accent:#1a5c99;--red:#c0392b;--nav-bg:rgba(244,241,232,0.95);
+    --section-title:#1a1510;--hero-h1:#1a1510;
+    --bg1:rgba(201,168,76,0.06);--bg2:rgba(76,142,201,0.04);
+    --table-hover:rgba(138,94,16,0.04);--td-border:rgba(0,0,0,0.06);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    background:var(--deep);
-    color:var(--text);
-    font-family:'DM Sans',sans-serif;
-    min-height:100vh;
-    overflow-x:hidden;
-  }
+  body{background:var(--deep);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background 0.3s,color 0.3s;}
+  body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 10%,var(--bg1) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 80% 90%,var(--bg2) 0%,transparent 60%);pointer-events:none;z-index:0;}
 
-  /* ── BACKGROUND TEXTURE ── */
-  body::before{
-    content:'';
-    position:fixed;inset:0;
-    background:
-      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(201,168,76,0.07) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(76,142,201,0.06) 0%, transparent 60%);
-    pointer-events:none;z-index:0;
-  }
-
-  /* ── NAV ── */
-  nav{
-    position:sticky;top:0;z-index:100;
-    background:rgba(11,14,20,0.92);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--border);
-    padding:0 2rem;
-    display:flex;align-items:center;justify-content:space-between;
-    height:60px;
-  }
-  .nav-logo{
-    font-family:'Playfair Display',serif;
-    font-size:1.3rem;font-weight:900;
-    color:var(--gold);letter-spacing:1px;
-  }
+  nav{position:sticky;top:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px;transition:background 0.3s,border-color 0.3s;}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;color:var(--gold);letter-spacing:1px;}
   .nav-logo span{color:var(--text);font-weight:400;font-size:0.85rem;display:block;letter-spacing:2px;font-family:'DM Sans',sans-serif;margin-top:-2px;}
+  .nav-right{display:flex;align-items:center;gap:0.75rem;}
   .nav-links{display:flex;gap:1.5rem;list-style:none;}
-  .nav-links a{
-    color:var(--muted);text-decoration:none;font-size:0.85rem;
-    font-weight:500;letter-spacing:0.5px;transition:color 0.2s;
-  }
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.5px;transition:color 0.2s;}
   .nav-links a:hover{color:var(--gold)}
-  .nav-wa{
-    background:var(--gold);color:var(--deep);
-    padding:0.4rem 1rem;border-radius:4px;
-    font-weight:600;font-size:0.8rem;text-decoration:none;
-    transition:background 0.2s;white-space:nowrap;
-  }
-  .nav-wa:hover{background:var(--gold-light)}
+  .nav-wa{background:var(--gold);color:#fff;padding:0.4rem 1rem;border-radius:4px;font-weight:600;font-size:0.8rem;text-decoration:none;transition:background 0.2s;white-space:nowrap;}
+  [data-theme="dark"] .nav-wa{color:var(--deep);}
+  .nav-wa:hover{opacity:0.88;}
 
-  /* ── HERO ── */
-  .hero{
-    position:relative;z-index:1;
-    text-align:center;
-    padding:5rem 2rem 3.5rem;
-    border-bottom:1px solid var(--border);
-  }
-  .hero-badge{
-    display:inline-block;
-    border:1px solid var(--gold-dim);
-    color:var(--gold);
-    font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;
-    padding:0.3rem 1rem;border-radius:2px;
-    margin-bottom:1.5rem;
-    font-family:'DM Mono',monospace;
-  }
-  .hero h1{
-    font-family:'Playfair Display',serif;
-    font-size:clamp(2.2rem,5vw,3.8rem);
-    font-weight:900;line-height:1.1;
-    color:#fff;
-    margin-bottom:0.5rem;
-  }
+  .theme-btn{width:36px;height:36px;border-radius:50%;background:var(--card);border:1px solid var(--border);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;}
+  .theme-btn:hover{border-color:var(--gold);transform:rotate(20deg) scale(1.1);}
+
+  .hero{position:relative;z-index:1;text-align:center;padding:5rem 2rem 3.5rem;border-bottom:1px solid var(--border);}
+  .hero-badge{display:inline-block;border:1px solid var(--gold-dim);color:var(--gold);font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;padding:0.3rem 1rem;border-radius:2px;margin-bottom:1.5rem;font-family:'DM Mono',monospace;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1.1;color:var(--hero-h1);margin-bottom:0.5rem;}
   .hero h1 span{color:var(--gold);}
-  .hero-sub{
-    color:var(--muted);font-size:0.95rem;
-    margin-bottom:2rem;letter-spacing:0.3px;
-  }
-  .hero-meta{
-    display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
-    font-family:'DM Mono',monospace;font-size:0.75rem;
-    color:var(--muted);
-  }
-  .hero-meta span{color:var(--gold-light);}
+  .hero-sub{color:var(--muted);font-size:0.95rem;margin-bottom:2rem;}
+  .hero-meta{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted);}
+  .hero-meta span{color:var(--gold);}
 
-  /* ── ALERT BANNER ── */
-  .alert-banner{
-    position:relative;z-index:1;
-    margin:1.5rem 2rem;
-    background:linear-gradient(135deg,rgba(224,92,92,0.12),rgba(224,92,92,0.05));
-    border:1px solid rgba(224,92,92,0.35);
-    border-radius:8px;padding:1rem 1.5rem;
-    display:flex;align-items:flex-start;gap:1rem;
-  }
-  .alert-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px;}
-  .alert-content h4{color:var(--red);font-size:0.9rem;font-weight:600;margin-bottom:0.3rem;}
-  .alert-content p{color:var(--text);font-size:0.85rem;line-height:1.5;}
+  .sched-banner{position:relative;z-index:1;margin:1.5rem 2rem 0;background:linear-gradient(135deg,rgba(76,196,168,0.1),rgba(76,142,201,0.05));border:1px solid rgba(76,196,168,0.3);border-radius:8px;padding:0.9rem 1.5rem;display:flex;align-items:flex-start;gap:1rem;}
+  .sched-banner p{color:var(--text);font-size:0.85rem;line-height:1.5;}
+  .sched-banner strong{color:#4cc9a8;}
 
-  /* ── SECTIONS ── */
   main{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 1.5rem 4rem;}
   section{margin-bottom:3.5rem;}
-  .section-header{
-    display:flex;align-items:center;gap:1rem;
-    margin-bottom:1.5rem;
-    padding-bottom:0.75rem;
-    border-bottom:1px solid var(--border);
-  }
-  .section-tag{
-    font-family:'DM Mono',monospace;font-size:0.7rem;
-    letter-spacing:2px;text-transform:uppercase;
-    color:var(--gold);border:1px solid var(--gold-dim);
-    padding:0.2rem 0.6rem;border-radius:2px;
-  }
-  .section-title{
-    font-family:'Playfair Display',serif;
-    font-size:1.5rem;font-weight:700;color:#fff;
-  }
+  .section-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
+  .section-tag{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-dim);padding:0.2rem 0.6rem;border-radius:2px;}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--section-title);}
 
-  /* ── NOTICE CARDS ── */
   .notices-grid{display:grid;gap:1rem;}
-  .notice-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:8px;padding:1.25rem 1.5rem;
-    display:flex;gap:1.25rem;align-items:flex-start;
-    transition:border-color 0.2s,transform 0.2s;
-  }
+  .notice-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;display:flex;gap:1.25rem;align-items:flex-start;transition:border-color 0.2s,transform 0.2s,background 0.3s;}
   .notice-card:hover{border-color:var(--gold-dim);transform:translateY(-2px);}
-  .notice-card.urgent{border-color:rgba(224,92,92,0.4);}
+  .notice-card.urgent{border-color:rgba(224,92,92,0.5);background:linear-gradient(135deg,rgba(224,92,92,0.05) 0%,var(--card) 55%);}
   .notice-card.urgent:hover{border-color:var(--red);}
-  .notice-dot{
-    width:10px;height:10px;border-radius:50%;
-    background:var(--gold);flex-shrink:0;margin-top:5px;
-  }
-  .notice-card.urgent .notice-dot{background:var(--red);}
-  .notice-body h4{font-size:0.95rem;font-weight:600;color:#fff;margin-bottom:0.3rem;}
-  .notice-body p{color:var(--muted);font-size:0.85rem;line-height:1.5;}
-  .notice-meta{
-    display:flex;gap:0.75rem;margin-top:0.6rem;flex-wrap:wrap;
-  }
-  .notice-tag{
-    font-size:0.7rem;font-family:'DM Mono',monospace;
-    background:rgba(201,168,76,0.1);color:var(--gold);
-    padding:0.15rem 0.5rem;border-radius:2px;border:1px solid var(--gold-dim);
-  }
-  .notice-tag.red{background:rgba(224,92,92,0.1);color:var(--red);border-color:rgba(224,92,92,0.3);}
-  .notice-tag.blue{background:rgba(76,142,201,0.1);color:var(--accent);border-color:rgba(76,142,201,0.3);}
+  .pulse{width:12px;height:12px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:4px;animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(224,92,92,0.6);}60%{box-shadow:0 0 0 7px rgba(224,92,92,0);}100%{box-shadow:0 0 0 0 rgba(224,92,92,0);}}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px;}
+  .notice-body h4{font-size:0.95rem;font-weight:600;color:var(--section-title);margin-bottom:0.4rem;}
+  .notice-body p{color:var(--muted);font-size:0.85rem;line-height:1.6;}
+  .nmeta{display:flex;gap:0.75rem;margin-top:0.6rem;flex-wrap:wrap;}
+  .ntag{font-size:0.7rem;font-family:'DM Mono',monospace;background:rgba(201,168,76,0.1);color:var(--gold);padding:0.15rem 0.5rem;border-radius:2px;border:1px solid var(--gold-dim);}
+  .ntag.r{background:rgba(224,92,92,0.1);color:var(--red);border-color:rgba(224,92,92,0.3);}
+  .ntag.b{background:rgba(76,142,201,0.1);color:var(--accent);border-color:rgba(76,142,201,0.3);}
+  .ntag.g{background:rgba(76,196,168,0.1);color:#4cc9a8;border-color:rgba(76,196,168,0.3);}
 
-  /* ── SCHEDULE ── */
   .schedule-tabs{display:flex;gap:0.5rem;margin-bottom:1.25rem;flex-wrap:wrap;}
-  .tab-btn{
-    background:var(--card);border:1px solid var(--border);
-    color:var(--muted);padding:0.45rem 1rem;border-radius:4px;
-    font-size:0.82rem;font-weight:500;cursor:pointer;
-    transition:all 0.2s;font-family:'DM Sans',sans-serif;
-  }
-  .tab-btn.active{background:var(--gold);color:var(--deep);border-color:var(--gold);}
+  .tab-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:0.45rem 1rem;border-radius:4px;font-size:0.82rem;font-weight:500;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+  .tab-btn.active{background:var(--gold);color:#fff;border-color:var(--gold);}
+  [data-theme="dark"] .tab-btn.active{color:var(--deep);}
   .tab-btn:hover:not(.active){border-color:var(--gold-dim);color:var(--gold);}
-
-  .schedule-table-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border);}
+  .tbl-wrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border);}
   table{width:100%;border-collapse:collapse;font-size:0.82rem;}
   thead tr{background:var(--card2);}
-  th{
-    padding:0.75rem 1rem;text-align:left;
-    color:var(--gold);font-weight:600;
-    font-family:'DM Mono',monospace;font-size:0.72rem;
-    letter-spacing:1px;text-transform:uppercase;
-    border-bottom:1px solid var(--border);
-  }
-  td{
-    padding:0.7rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);
-    color:var(--text);vertical-align:top;
-  }
+  th{padding:0.75rem 1rem;text-align:left;color:var(--gold);font-weight:600;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid var(--border);}
+  td{padding:0.7rem 1rem;border-bottom:1px solid var(--td-border);color:var(--text);vertical-align:top;transition:background 0.15s;}
   tr:last-child td{border-bottom:none;}
-  tr:hover td{background:rgba(201,168,76,0.03);}
-  .cell-subject{font-weight:600;color:#fff;font-size:0.85rem;}
-  .cell-teacher{color:var(--muted);font-size:0.78rem;font-family:'DM Mono',monospace;}
-  .day-badge{
-    display:inline-block;background:var(--card2);
-    color:var(--gold);padding:0.15rem 0.5rem;border-radius:3px;
-    font-size:0.7rem;font-family:'DM Mono',monospace;
-    font-weight:600;
-  }
-  .break-cell{
-    color:var(--muted);font-style:italic;font-size:0.78rem;
-    text-align:center;
-  }
-  .cancelled{
-    text-decoration:line-through;color:var(--red);opacity:0.7;
-    font-size:0.78rem;
-  }
-  .cancelled-badge{
-    display:inline-block;background:rgba(224,92,92,0.12);
-    color:var(--red);padding:0.1rem 0.45rem;border-radius:2px;
-    font-size:0.68rem;border:1px solid rgba(224,92,92,0.3);margin-left:0.4rem;
-  }
-  .wed-row td{background:rgba(76,196,168,0.04);color:var(--muted);font-style:italic;}
+  tr:hover td{background:var(--table-hover);}
+  .cs{font-weight:600;color:var(--section-title);font-size:0.85rem;}
+  .ct{color:var(--muted);font-size:0.78rem;font-family:'DM Mono',monospace;}
+  .dbadge{display:inline-block;background:var(--card2);color:var(--gold);padding:0.15rem 0.5rem;border-radius:3px;font-size:0.7rem;font-family:'DM Mono',monospace;font-weight:600;}
+  .bk{color:var(--muted);font-style:italic;font-size:0.78rem;text-align:center;}
+  .asgn td{background:rgba(76,196,168,0.04);color:var(--muted);font-style:italic;}
+  .fkey{margin-top:1.25rem;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem;transition:background 0.3s;}
+  .fkey-title{color:var(--gold);font-size:0.72rem;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.75rem;}
+  .fkey-grid{display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;}
+  .fkey-item{font-size:0.78rem;color:var(--muted);}
+  .fkey-item b{color:var(--text);}
 
-  /* ── RESOURCES ── */
   .res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;}
-  .res-card{
-    background:var(--card);border:1px solid var(--border);
-    border-radius:8px;padding:1.25rem;
-    transition:all 0.2s;text-decoration:none;display:block;
-  }
+  .res-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.25rem;transition:all 0.2s;text-decoration:none;display:block;}
   .res-card:hover{border-color:var(--gold-dim);transform:translateY(-3px);}
   .res-icon{font-size:1.8rem;margin-bottom:0.75rem;}
-  .res-card h4{color:#fff;font-size:0.95rem;font-weight:600;margin-bottom:0.3rem;}
+  .res-card h4{color:var(--section-title);font-size:0.95rem;font-weight:600;margin-bottom:0.3rem;}
   .res-card p{color:var(--muted);font-size:0.82rem;line-height:1.4;}
-  .res-link{
-    display:inline-flex;align-items:center;gap:0.35rem;
-    margin-top:0.75rem;color:var(--gold);font-size:0.78rem;
-    font-weight:500;
-  }
+  .res-link{display:inline-flex;align-items:center;gap:0.35rem;margin-top:0.75rem;color:var(--gold);font-size:0.78rem;font-weight:500;}
   .res-link::after{content:'→';}
 
-  /* ── TEAM ── */
   .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem;}
-  .team-card{
-    background:var(--card);border:1px solid var(--border);
-    border-radius:8px;padding:1.1rem;text-align:center;
-    transition:all 0.2s;
-  }
+  .team-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem;text-align:center;transition:all 0.2s;}
   .team-card:hover{border-color:var(--gold-dim);}
-  .team-avatar{
-    width:52px;height:52px;border-radius:50%;
-    background:linear-gradient(135deg,var(--gold-dim),var(--deep));
-    display:flex;align-items:center;justify-content:center;
-    font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);
-    margin:0 auto 0.6rem;border:1px solid var(--border);
-  }
-  .team-card h5{color:#fff;font-size:0.88rem;font-weight:600;margin-bottom:0.2rem;}
+  .avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),var(--dark));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);margin:0 auto 0.6rem;border:1px solid var(--border);}
+  .team-card h5{color:var(--section-title);font-size:0.88rem;font-weight:600;margin-bottom:0.2rem;}
   .team-card p{color:var(--gold);font-size:0.72rem;font-family:'DM Mono',monospace;letter-spacing:0.5px;}
   .team-card.tbd{opacity:0.45;}
 
-  /* ── QUICK INFO ── */
   .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
-  .info-box{
-    background:var(--card);border:1px solid var(--border);
-    border-radius:8px;padding:1.1rem;
-  }
+  .info-box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem;transition:background 0.3s;}
   .info-box h5{color:var(--muted);font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;font-family:'DM Mono',monospace;margin-bottom:0.5rem;}
-  .info-box p{color:#fff;font-size:0.92rem;font-weight:500;}
+  .info-box p{color:var(--section-title);font-size:0.92rem;font-weight:500;}
   .info-box span{color:var(--gold);}
 
-  /* ── FOOTER ── */
-  footer{
-    position:relative;z-index:1;
-    border-top:1px solid var(--border);
-    padding:2rem;text-align:center;
-    color:var(--muted);font-size:0.78rem;
-  }
+  footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--muted);font-size:0.78rem;background:var(--deep);transition:background 0.3s;}
   footer a{color:var(--gold);text-decoration:none;}
 
-  /* ── HAMBURGER ── */
   .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
-  .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s;}
-  .mobile-menu{
-    display:none;position:fixed;inset:60px 0 0 0;
-    background:rgba(11,14,20,0.98);z-index:99;
-    flex-direction:column;align-items:center;justify-content:center;gap:2rem;
-  }
+  .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;}
+  .mobile-menu{display:none;position:fixed;inset:60px 0 0 0;background:var(--nav-bg);backdrop-filter:blur(12px);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
   .mobile-menu.open{display:flex;}
   .mobile-menu a{color:var(--text);text-decoration:none;font-size:1.2rem;font-weight:500;}
 
@@ -292,36 +138,31 @@
     .hamburger{display:flex;}
     .hero{padding:3rem 1.5rem 2.5rem;}
     th,td{padding:0.6rem 0.65rem;}
+    .sched-banner{margin:1rem 1rem 0;}
   }
-
-  /* ── ANIM ── */
   @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
   .hero{animation:fadeUp 0.7s ease both;}
-  .alert-banner{animation:fadeUp 0.7s 0.15s ease both;}
+  .sched-banner{animation:fadeUp 0.6s 0.1s ease both;}
   section{animation:fadeUp 0.7s 0.2s ease both;}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">
-    ECOSS
-    <span>ECONOMICS STUDENTS SOCIETY · TU KIRTIPUR</span>
-  </div>
+  <div class="nav-logo">ECOSS<span>ECONOMICS STUDENTS SOCIETY · TU KIRTIPUR</span></div>
   <ul class="nav-links">
     <li><a href="#notices">Notices</a></li>
     <li><a href="#schedule">Schedule</a></li>
     <li><a href="#resources">Resources</a></li>
     <li><a href="#team">Team</a></li>
   </ul>
-  <a class="nav-wa" href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" target="_blank">📲 Join WhatsApp</a>
-  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+    <a class="nav-wa" href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" target="_blank">📲 Join WhatsApp</a>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#notices" onclick="toggleMenu()">Notices</a>
   <a href="#schedule" onclick="toggleMenu()">Schedule</a>
@@ -330,7 +171,6 @@
   <a href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" target="_blank">📲 Join WhatsApp</a>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-badge">Academic Year 2082 · First Semester</div>
   <h1>Your <span>Economics</span><br/>Hub at TU</h1>
@@ -342,11 +182,13 @@
   </div>
 </div>
 
-
+<div class="sched-banner">
+  <span style="font-size:1.2rem;flex-shrink:0;margin-top:2px;">📅</span>
+  <p><strong>Schedule Update (From Next Week):</strong> Classes will now run <strong>Monday to Wednesday</strong> instead of Sunday to Tuesday. Schedule below has been updated accordingly.</p>
+</div>
 
 <main>
 
-  <!-- NOTICES -->
   <section id="notices">
     <div class="section-header">
       <div class="section-tag">📢 Latest</div>
@@ -354,96 +196,69 @@
     </div>
     <div class="notices-grid">
 
-      <!-- Library Notice -->
+      <!-- URGENT WEBINAR -->
       <div class="notice-card urgent">
-        <div class="notice-dot"></div>
+        <div class="pulse"></div>
         <div class="notice-body">
-          <h4>📚 Library Orientation Program – MANDATORY ATTENDANCE</h4>
+          <h4>🌐 WEBINAR — World Economic Trends &amp; Their Impact on Smaller Nations</h4>
           <p>
-            TU Central Library is organizing a <strong>Library Orientation Training</strong> for all First Semester (MA) students of the Department of Economics for Academic Year 2082/083 (2025).<br/><br/>
-            📅 <strong>Date:</strong> Chaitra 25, 2082 (April 8, Wednesday)<br/>
-            ⏰ <strong>Time:</strong> From 10:30 AM onwards<br/>
-            📍 <strong>Venue:</strong> TU Central Library, Kirtipur<br/><br/>
-            All students must attend. This is mandatory as per the department notice issued by Prof. Dr. Ram Prasad Gyanwaly, Head.
-          </p>
-          <div class="notice-meta">
-            <span class="notice-tag red">URGENT</span>
-            <span class="notice-tag">MANDATORY</span>
-            <span class="notice-tag blue">Today</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Term Paper Notice -->
-      <div class="notice-card urgent">
-        <div class="notice-dot"></div>
-        <div class="notice-body">
-          <h4>📝 Term Paper Writing Program </h4>
-          <p>
-            ECOSS is organizing a <strong>Term Paper Writing Program</strong> today. All interested students are encouraged to attend.<br/><br/>
-            📅 <strong>Date:</strong> Chaitra 25, 2082 (April 8, Wednesday)<br/>
-            ⏰ <strong>Time:</strong> 12:30 PM – 2:00 PM<br/>
-            📍 <strong>Venue:</strong> Computer Lab<br/>
-            🎙️ <strong>Facilitator:</strong> Raja Karn
-          </p>
-          <div class="notice-meta">
-            <span class="notice-tag blue">Today</span>
-            <span class="notice-tag">OPEN TO ALL</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Online Webinar Notice -->
-      <div class="notice-card">
-        <div class="notice-dot"></div>
-        <div class="notice-body">
-          <h4>🌐 Online Webinar – World Economic Trends and Their Impact on Smaller Nations</h4>
-          <p>
-            Join us for an insightful online session on global economics and its impact on developing nations.<br/><br/>
+            Join this insightful online session on global economics and its effects on developing nations.<br/><br/>
             💻 <strong>Modality:</strong> Online (Zoom Webinar)<br/>
             📅 <strong>Date:</strong> April 10, 2026 (Friday)<br/>
             ⏰ <strong>Time:</strong> 8:00 PM – 9:00 PM (NPT)<br/>
             🎙️ <strong>Speaker:</strong> Dr. Robin Dhakal<br/><br/>
-            ⚠️ Registration form closes at <strong>5:00 PM on April 9</strong>. Fill the form to confirm your participation.<br/>
-            👉 <a href="https://forms.gle/R5UCfLrn1uyQC6wh8" target="_blank" style="color:var(--gold);">Register Here →</a>
+            ⚠️ <strong>Registration closes 5:00 PM on April 9.</strong> Fill the form now!<br/>
+            👉 <a href="https://forms.gle/R5UCfLrn1uyQC6wh8" target="_blank" style="color:var(--gold);font-weight:600;">Register Here →</a>
           </p>
-          <div class="notice-meta">
-            <span class="notice-tag blue">April 10</span>
-            <span class="notice-tag">WEBINAR</span>
-            <span class="notice-tag red">Form closes April 9</span>
+          <div class="nmeta">
+            <span class="ntag r">URGENT</span>
+            <span class="ntag r">Reg. closes April 9</span>
+            <span class="ntag b">April 10 · Friday</span>
+            <span class="ntag">WEBINAR</span>
           </div>
         </div>
       </div>
 
-      <!-- Scholarship Notice -->
+      <!-- Schedule change notice -->
       <div class="notice-card">
-        <div class="notice-dot"></div>
+        <div class="dot"></div>
+        <div class="notice-body">
+          <h4>🗓️ Class Schedule Change – Effective Next Week</h4>
+          <p>From next week, classes will run <strong>Monday to Wednesday</strong> instead of Sunday to Tuesday. Thu/Fri/Sat will be assignment days. Please check the updated schedule below.</p>
+          <div class="nmeta">
+            <span class="ntag g">SCHEDULE UPDATE</span>
+            <span class="ntag b">From Next Week</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scholarship -->
+      <div class="notice-card">
+        <div class="dot"></div>
         <div class="notice-body">
           <h4>🎓 Scholarship Applications Open – 1st Semester Students</h4>
           <p>
-            Scholarship forms are now open for students of the 1st Semester. Interested students can apply online.<br/><br/>
+            Scholarship forms are now open for 1st Semester students. Apply online.<br/><br/>
             🌐 <strong>Apply at:</strong> <a href="https://www.uch.edu.np" target="_blank" style="color:var(--gold);">www.uch.edu.np</a><br/>
             📅 <strong>Deadline:</strong> Baisakh 20, 2083
           </p>
-          <div class="notice-meta">
-            <span class="notice-tag">SCHOLARSHIP</span>
-            <span class="notice-tag blue">1st Sem</span>
-            <span class="notice-tag red">Deadline: Baisakh 20</span>
+          <div class="nmeta">
+            <span class="ntag">SCHOLARSHIP</span>
+            <span class="ntag b">1st Sem</span>
+            <span class="ntag r">Deadline: Baisakh 20</span>
           </div>
         </div>
       </div>
 
-      <!-- General -->
+      <!-- Daily Notes -->
       <div class="notice-card">
-        <div class="notice-dot"></div>
+        <div class="dot"></div>
         <div class="notice-body">
-          <h4>🗂️ Daily Class Notes Now Available on Google Drive</h4>
-          <p>
-            ECOSS is uploading daily class notes on the same day classes are held. Check the Resources section below to access notes for your section. Notes for other semesters coming soon.
-          </p>
-          <div class="notice-meta">
-            <span class="notice-tag">ECOSS INITIATIVE</span>
-            <span class="notice-tag blue">1st Sem</span>
+          <h4>🗂️ Daily Class Notes Available on Google Drive</h4>
+          <p>ECOSS uploads class notes on the same day classes are held. Check the Resources section for your section's notes. Other semesters coming soon.</p>
+          <div class="nmeta">
+            <span class="ntag">ECOSS INITIATIVE</span>
+            <span class="ntag b">1st Sem</span>
           </div>
         </div>
       </div>
@@ -458,143 +273,101 @@
       <h2 class="section-title">Class Schedule – 1st Semester</h2>
     </div>
     <p style="color:var(--muted);font-size:0.82rem;margin-bottom:1rem;">
-      Effective from Magh 25, 2082 &nbsp;·&nbsp; Section A: Odd Roll Numbers (Room #116) &nbsp;·&nbsp; Section B: Even Roll Numbers (Room #3)
+      Updated: Mon–Wed classes effective next week &nbsp;·&nbsp; Section A: Odd Roll Nos. (Room #116) &nbsp;·&nbsp; Section B: Even Roll Nos. (Room #3)
     </p>
-
     <div class="schedule-tabs">
       <button class="tab-btn active" onclick="showTab('secA',this)">Section A</button>
       <button class="tab-btn" onclick="showTab('secB',this)">Section B</button>
     </div>
 
-    <!-- SECTION A -->
-    <div id="secA" class="schedule-table-wrap">
+    <div id="secA" class="tbl-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Day</th>
-            <th>11:00–12:00</th>
-            <th>12:00–13:00</th>
-            <th>13:00–13:30</th>
-            <th>13:30–14:30</th>
-            <th>14:30–15:30</th>
-            <th>15:30–16:30</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Day</th><th>11:00–12:00</th><th>12:00–13:00</th><th>13:00–13:30</th><th>13:30–14:30</th><th>14:30–15:30</th><th>15:30–16:30</th></tr></thead>
         <tbody>
           <tr>
-            <td><span class="day-badge">SUN</span></td>
-            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">RBT</div></td>
-            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">BRK</div></td>
-            <td class="break-cell" rowspan="6">B<br/>R<br/>E<br/>A<br/>K</td>
-            <td><div class="cell-subject">Math.Eco</div><div class="cell-teacher">DBA</div></td>
-            <td><div class="cell-subject">Dev. Eco I</div><div class="cell-teacher">DA</div></td>
-            <td><div class="cell-subject">HET</div><div class="cell-teacher">SB</div></td>
+            <td><span class="dbadge">MON</span></td>
+            <td><div class="cs">Micro I</div><div class="ct">RBT</div></td>
+            <td><div class="cs">Macro I</div><div class="ct">BRK</div></td>
+            <td class="bk" rowspan="6">B<br/>R<br/>E<br/>A<br/>K</td>
+            <td><div class="cs">Math.Eco</div><div class="ct">DBA</div></td>
+            <td><div class="cs">Dev. Eco I</div><div class="ct">DA</div></td>
+            <td><div class="cs">HET</div><div class="ct">SB</div></td>
           </tr>
           <tr>
-            <td><span class="day-badge">MON</span></td>
-            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">PN</div></td>
-            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">SRA</div></td>
-            <td><div class="cell-subject">Math. Eco</div><div class="cell-teacher">NBA</div></td>
-            <td><div class="cell-subject">Dev. Econ I</div><div class="cell-teacher">KRA</div></td>
-            <td><div class="cell-subject">HET</div><div class="cell-teacher">RCP</div></td>
+            <td><span class="dbadge">TUE</span></td>
+            <td><div class="cs">Micro I</div><div class="ct">PN</div></td>
+            <td><div class="cs">Macro I</div><div class="ct">SRA</div></td>
+            <td><div class="cs">Math. Eco</div><div class="ct">NBA</div></td>
+            <td><div class="cs">Dev. Econ I</div><div class="ct">KRA</div></td>
+            <td><div class="cs">HET</div><div class="ct">RCP</div></td>
           </tr>
           <tr>
-            <td><span class="day-badge">TUE</span></td>
-            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">PN</div></td>
-            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">RPG</div></td>
-            <td><div class="cell-subject">Meth.Eco</div><div class="cell-teacher">DBA</div></td>
-            <td><div class="cell-subject">HET</div><div class="cell-teacher">RCP</div></td>
-            <td><div class="cell-subject">Dev.Eco</div><div class="cell-teacher">NKR</div></td>
+            <td><span class="dbadge">WED</span></td>
+            <td><div class="cs">Micro I</div><div class="ct">PN</div></td>
+            <td><div class="cs">Macro I</div><div class="ct">RPG</div></td>
+            <td><div class="cs">Meth.Eco</div><div class="ct">DBA</div></td>
+            <td><div class="cs">HET</div><div class="ct">RCP</div></td>
+            <td><div class="cs">Dev.Eco</div><div class="ct">NKR</div></td>
           </tr>
-          <tr class="wed-row">
-            <td><span class="day-badge">WED</span></td>
-            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
-          </tr>
-          <tr class="wed-row">
-            <td><span class="day-badge">THU</span></td>
-            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
-          </tr>
-          <tr class="wed-row">
-            <td><span class="day-badge">FRI</span></td>
-            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
-          </tr>
+          <tr class="asgn"><td><span class="dbadge">THU</span></td><td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td></tr>
+          <tr class="asgn"><td><span class="dbadge">FRI</span></td><td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td></tr>
+          <tr class="asgn"><td><span class="dbadge">SAT</span></td><td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- SECTION B -->
-    <div id="secB" class="schedule-table-wrap" style="display:none;">
+    <div id="secB" class="tbl-wrap" style="display:none;">
       <table>
-        <thead>
-          <tr>
-            <th>Day</th>
-            <th>11:00–12:00</th>
-            <th>12:00–13:00</th>
-            <th>13:00–13:30</th>
-            <th>13:30–14:30</th>
-            <th>14:30–15:30</th>
-            <th>15:30–16:30</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Day</th><th>11:00–12:00</th><th>12:00–13:00</th><th>13:00–13:30</th><th>13:30–14:30</th><th>14:30–15:30</th><th>15:30–16:30</th></tr></thead>
         <tbody>
           <tr>
-            <td><span class="day-badge">SUN</span></td>
-            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">BRK</div></td>
-            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">RBT</div></td>
-            <td class="break-cell" rowspan="6">B<br/>R<br/>E<br/>A<br/>K</td>
-            <td><div class="cell-subject">Dev. Eco I</div><div class="cell-teacher">DA</div></td>
-            <td><div class="cell-subject">Math.Eco</div><div class="cell-teacher">DBA</div></td>
-            <td><div class="cell-subject">HET</div><div class="cell-teacher">RCP</div></td>
+            <td><span class="dbadge">MON</span></td>
+            <td><div class="cs">Macro I</div><div class="ct">BRK</div></td>
+            <td><div class="cs">Micro I</div><div class="ct">RBT</div></td>
+            <td class="bk" rowspan="6">B<br/>R<br/>E<br/>A<br/>K</td>
+            <td><div class="cs">Dev. Eco I</div><div class="ct">DA</div></td>
+            <td><div class="cs">Math.Eco</div><div class="ct">DBA</div></td>
+            <td><div class="cs">HET</div><div class="ct">RCP</div></td>
           </tr>
           <tr>
-            <td><span class="day-badge">MON</span></td>
-            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">SRA</div></td>
-            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">PN</div></td>
-            <td><div class="cell-subject">Dev. Econ I</div><div class="cell-teacher">KRA</div></td>
-            <td><div class="cell-subject">Math.Eco</div><div class="cell-teacher">NBA</div></td>
-            <td><div class="cell-subject">HET</div><div class="cell-teacher">SB</div></td>
+            <td><span class="dbadge">TUE</span></td>
+            <td><div class="cs">Macro I</div><div class="ct">SRA</div></td>
+            <td><div class="cs">Micro I</div><div class="ct">PN</div></td>
+            <td><div class="cs">Dev. Econ I</div><div class="ct">KRA</div></td>
+            <td><div class="cs">Math.Eco</div><div class="ct">NBA</div></td>
+            <td><div class="cs">HET</div><div class="ct">SB</div></td>
           </tr>
           <tr>
-            <td><span class="day-badge">TUE</span></td>
-            <td><div class="cell-subject">Macro I</div><div class="cell-teacher">RPG</div></td>
-            <td><div class="cell-subject">Micro I</div><div class="cell-teacher">PN</div></td>
-            <td><div class="cell-subject">Dev.Eco I</div><div class="cell-teacher">SA</div></td>
-            <td><div class="cell-subject">Meth.Eco</div><div class="cell-teacher">DBA</div></td>
-            <td><div class="cell-subject">HET</div><div class="cell-teacher">RCP</div></td>
+            <td><span class="dbadge">WED</span></td>
+            <td><div class="cs">Macro I</div><div class="ct">RPG</div></td>
+            <td><div class="cs">Micro I</div><div class="ct">PN</div></td>
+            <td><div class="cs">Dev.Eco I</div><div class="ct">SA</div></td>
+            <td><div class="cs">Meth.Eco</div><div class="ct">DBA</div></td>
+            <td><div class="cs">HET</div><div class="ct">RCP</div></td>
           </tr>
-          <tr class="wed-row">
-            <td><span class="day-badge">WED</span></td>
-            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
-          </tr>
-          <tr class="wed-row">
-            <td><span class="day-badge">THU</span></td>
-            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
-          </tr>
-          <tr class="wed-row">
-            <td><span class="day-badge">FRI</span></td>
-            <td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td>
-          </tr>
+          <tr class="asgn"><td><span class="dbadge">THU</span></td><td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td></tr>
+          <tr class="asgn"><td><span class="dbadge">FRI</span></td><td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td></tr>
+          <tr class="asgn"><td><span class="dbadge">SAT</span></td><td colspan="5" style="text-align:center;">Assignment · Term Paper Presentation · Guest Lecturer</td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- Faculty Key -->
-    <div style="margin-top:1.25rem;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem;">
-      <p style="color:var(--gold);font-size:0.72rem;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.75rem;">Faculty Key</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;">
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">BRK</b> – Baburam Karki</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">DBA</b> – Dr. Dipak Bahadur Adhikari</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">KRA</b> – Prof.Dr. Krishna R Acharya</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">SB</b> – Prof.Dr. Shiva Bhusal</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">RCP</b> – Dr. Ramesh Chandra Paudel</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">NKR</b> – Dr. Nirmal K. Raut</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">RBT</b> – Dr. Resham Bahadur Thapa</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">PN</b> – Dr. Pramshu Nepal</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">DA</b> – Damodar Adhikari</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">SA</b> – Prof.Dr. Sanjay Acharya</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">SRA</b> – Prof.Dr. Shiva R Adhikari</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">NBA</b> – Naveen Adhikari</span>
-        <span style="font-size:0.78rem;color:var(--muted);"><b style="color:var(--text)">RPG</b> – Prof.Dr. Ram Prasad Gyanwaly</span>
+    <div class="fkey">
+      <p class="fkey-title">Faculty Key</p>
+      <div class="fkey-grid">
+        <span class="fkey-item"><b>BRK</b> – Baburam Karki</span>
+        <span class="fkey-item"><b>DBA</b> – Dr. Dipak Bahadur Adhikari</span>
+        <span class="fkey-item"><b>KRA</b> – Prof.Dr. Krishna R Acharya</span>
+        <span class="fkey-item"><b>SB</b> – Prof.Dr. Shiva Bhusal</span>
+        <span class="fkey-item"><b>RCP</b> – Dr. Ramesh Chandra Paudel</span>
+        <span class="fkey-item"><b>NKR</b> – Dr. Nirmal K. Raut</span>
+        <span class="fkey-item"><b>RBT</b> – Dr. Resham Bahadur Thapa</span>
+        <span class="fkey-item"><b>PN</b> – Dr. Pramshu Nepal</span>
+        <span class="fkey-item"><b>DA</b> – Damodar Adhikari</span>
+        <span class="fkey-item"><b>SA</b> – Prof.Dr. Sanjay Acharya</span>
+        <span class="fkey-item"><b>SRA</b> – Prof.Dr. Shiva R Adhikari</span>
+        <span class="fkey-item"><b>NBA</b> – Naveen Adhikari</span>
+        <span class="fkey-item"><b>RPG</b> – Prof.Dr. Ram Prasad Gyanwaly</span>
       </div>
     </div>
   </section>
@@ -607,35 +380,30 @@
     </div>
     <div class="res-grid">
       <a class="res-card" href="https://drive.google.com/drive/folders/1TikFHWWUM8_8QjYA2St8rAo3MpXIfNRY" target="_blank">
-        <div class="res-icon">📂</div>
-        <h4>1st Sem – Section B Notes</h4>
+        <div class="res-icon">📂</div><h4>1st Sem – Section B Notes</h4>
         <p>Daily class notes for Section B (Even Roll Numbers). Updated same-day after class.</p>
         <div class="res-link">Open Google Drive</div>
       </a>
       <a class="res-card" href="https://drive.google.com/drive/folders/1FCQ5mj0k0T1iDP4WLaT3l7FwCCnHqT72" target="_blank">
-        <div class="res-icon">📂</div>
-        <h4>1st Sem – Section A Notes</h4>
+        <div class="res-icon">📂</div><h4>1st Sem – Section A Notes</h4>
         <p>Daily class notes for Section A (Odd Roll Numbers). Updated same-day after class.</p>
         <div class="res-link">Open Google Drive</div>
       </a>
       <a class="res-card" href="https://drive.google.com/drive/folders/1-729Gowt5KVHL1Wwcx17E-rPxDqZdfP7" target="_blank">
-        <div class="res-icon">🗄️</div>
-        <h4>Master Drive – All Semesters</h4>
+        <div class="res-icon">🗄️</div><h4>Master Drive – All Semesters</h4>
         <p>Central repository for all semester notes. Notes for other semesters coming soon.</p>
         <div class="res-link">Open Master Drive</div>
       </a>
       <div class="res-card" style="opacity:0.5;cursor:default;">
-        <div class="res-icon">🔒</div>
-        <h4>3rd Sem Notes</h4>
-        <p>Notes for 3rd Semester (Academic Year 2080). Coming soon via Master Drive.</p>
+        <div class="res-icon">🔒</div><h4>3rd Sem Notes</h4>
+        <p>Notes for 3rd Semester (2080). Coming soon via Master Drive.</p>
         <div class="res-link" style="color:var(--muted);">Coming Soon</div>
       </div>
     </div>
-
-    <div style="margin-top:1rem;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;display:flex;gap:0.75rem;align-items:center;">
+    <div style="margin-top:1rem;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem 1.25rem;display:flex;gap:0.75rem;align-items:center;transition:background 0.3s;">
       <span style="font-size:1.2rem;">💡</span>
       <p style="color:var(--muted);font-size:0.83rem;line-height:1.5;">
-        ECOSS uploads class notes on the <strong style="color:var(--text)">same day</strong> classes are held. If you missed a class, check Google Drive or ask in the <a href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" style="color:var(--gold)">WhatsApp group</a>.
+        ECOSS uploads notes on the <strong style="color:var(--text)">same day</strong> as class. Missed a class? Check the Drive or ask in the <a href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" style="color:var(--gold)">WhatsApp group</a>.
       </p>
     </div>
   </section>
@@ -647,30 +415,12 @@
       <h2 class="section-title">Quick Info</h2>
     </div>
     <div class="info-grid">
-      <div class="info-box">
-        <h5>Active Semesters</h5>
-        <p><span>1st Sem</span> (2082) &amp; <span>3rd Sem</span> (2080)</p>
-      </div>
-      <div class="info-box">
-        <h5>Section A Room</h5>
-        <p>Room <span>#116</span> · Odd Roll Nos.</p>
-      </div>
-      <div class="info-box">
-        <h5>Section B Room</h5>
-        <p>Room <span>#3</span> · Even Roll Nos.</p>
-      </div>
-      <div class="info-box">
-        <h5>Class Timings</h5>
-        <p><span>11:00 AM – 4:30 PM</span></p>
-      </div>
-      <div class="info-box">
-        <h5>Department Head</h5>
-        <p>Prof. Dr. Ram Prasad Gyanwaly</p>
-      </div>
-      <div class="info-box">
-        <h5>Contact ECOSS</h5>
-        <p><a href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" style="color:var(--gold);text-decoration:none;">WhatsApp Group →</a></p>
-      </div>
+      <div class="info-box"><h5>Active Semesters</h5><p><span>1st Sem</span> (2082) &amp; <span>3rd Sem</span> (2080)</p></div>
+      <div class="info-box"><h5>Section A Room</h5><p>Room <span>#116</span> · Odd Roll Nos.</p></div>
+      <div class="info-box"><h5>Section B Room</h5><p>Room <span>#3</span> · Even Roll Nos.</p></div>
+      <div class="info-box"><h5>Class Days</h5><p><span>Mon – Wed</span> (from next week)</p></div>
+      <div class="info-box"><h5>Department Head</h5><p>Prof. Dr. Ram Prasad Gyanwaly</p></div>
+      <div class="info-box"><h5>Contact ECOSS</h5><p><a href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" style="color:var(--gold);text-decoration:none;">WhatsApp Group →</a></p></div>
     </div>
   </section>
 
@@ -681,83 +431,31 @@
       <h2 class="section-title">Our Team</h2>
     </div>
     <div class="team-grid">
-      <div class="team-card tbd">
-        <div class="team-avatar">?</div>
-        <h5>President</h5>
-        <p>To Be Elected</p>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">K</div>
-        <h5>Kapil Joshi</h5>
-        <p>Vice President</p>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">P</div>
-        <h5>Prakriti Chaulagai</h5>
-        <p>Secretary</p>
-      </div>
-      <div class="team-card tbd">
-        <div class="team-avatar">?</div>
-        <h5>Vice Secretary</h5>
-        <p>To Be Elected</p>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">D</div>
-        <h5>Durga Ghimire</h5>
-        <p>Treasurer</p>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">R</div>
-        <h5>Rijohn Shrestha</h5>
-        <p>Joint Secretary</p>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">P</div>
-        <h5>Piyush Bohara</h5>
-        <p>Member</p>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">B</div>
-        <h5>Beeja Bohara</h5>
-        <p>Member</p>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">T</div>
-        <h5>Tek Prasad Regmi</h5>
-        <p>Member</p>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">R</div>
-        <h5>Radha Kharel</h5>
-        <p>Member</p>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">D</div>
-        <h5>Dinesh Pant</h5>
-        <p>Member</p>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">S</div>
-        <h5>Sandeep Bhandari</h5>
-        <p>Member</p>
-      </div>
+      <div class="team-card tbd"><div class="avatar">?</div><h5>President</h5><p>To Be Elected</p></div>
+      <div class="team-card"><div class="avatar">K</div><h5>Kapil Joshi</h5><p>Vice President</p></div>
+      <div class="team-card"><div class="avatar">P</div><h5>Prakriti Chaulagai</h5><p>Secretary</p></div>
+      <div class="team-card tbd"><div class="avatar">?</div><h5>Vice Secretary</h5><p>To Be Elected</p></div>
+      <div class="team-card"><div class="avatar">D</div><h5>Durga Ghimire</h5><p>Treasurer</p></div>
+      <div class="team-card"><div class="avatar">R</div><h5>Rijohn Shrestha</h5><p>Joint Secretary</p></div>
+      <div class="team-card"><div class="avatar">P</div><h5>Piyush Bohara</h5><p>Member</p></div>
+      <div class="team-card"><div class="avatar">B</div><h5>Beeja Bohara</h5><p>Member</p></div>
+      <div class="team-card"><div class="avatar">T</div><h5>Tek Prasad Regmi</h5><p>Member</p></div>
+      <div class="team-card"><div class="avatar">R</div><h5>Radha Kharel</h5><p>Member</p></div>
+      <div class="team-card"><div class="avatar">D</div><h5>Dinesh Pant</h5><p>Member</p></div>
+      <div class="team-card"><div class="avatar">S</div><h5>Sandeep Bhandari</h5><p>Member</p></div>
     </div>
   </section>
 
 </main>
 
 <footer>
-  <p style="margin-bottom:0.4rem;">
-    <strong style="color:var(--gold)">ECOSS</strong> — Economics Students Society &nbsp;·&nbsp; Central Department of Economics, Tribhuvan University, Kirtipur
-  </p>
+  <p style="margin-bottom:0.4rem;"><strong style="color:var(--gold)">ECOSS</strong> — Economics Students Society &nbsp;·&nbsp; Central Department of Economics, Tribhuvan University, Kirtipur</p>
   <p>
-    <a href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" target="_blank">📲 WhatsApp Group</a>
-    &nbsp;·&nbsp;
-    <a href="https://drive.google.com/drive/folders/1-729Gowt5KVHL1Wwcx17E-rPxDqZdfP7" target="_blank">📁 Master Notes Drive</a>
-    &nbsp;·&nbsp;
+    <a href="https://chat.whatsapp.com/IIxLkvRjgZy77HrtHRUHPj?mode=gi_t" target="_blank">📲 WhatsApp Group</a> &nbsp;·&nbsp;
+    <a href="https://drive.google.com/drive/folders/1-729Gowt5KVHL1Wwcx17E-rPxDqZdfP7" target="_blank">📁 Master Notes Drive</a> &nbsp;·&nbsp;
     <a href="http://www.cedecontu.edu.np" target="_blank">🌐 Department Website</a>
   </p>
-  <p style="margin-top:0.75rem;font-size:0.72rem;">Built and Managed by Piyush Bohara for students of CEDECON</p>
+  <p style="margin-top:0.75rem;font-size:0.72rem;">Built and managed by Piyush Bohara for students of CEDECON</p>
 </footer>
 
 <script>
@@ -770,6 +468,17 @@
   }
   function toggleMenu(){
     document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  // Theme toggle — persists across visits
+  const html=document.documentElement, btn=document.getElementById('themeBtn');
+  const saved=localStorage.getItem('ecoss-theme')||'dark';
+  html.setAttribute('data-theme',saved);
+  btn.textContent=saved==='dark'?'🌙':'☀️';
+  function toggleTheme(){
+    const next=html.getAttribute('data-theme')==='dark'?'light':'dark';
+    html.setAttribute('data-theme',next);
+    btn.textContent=next==='dark'?'🌙':'☀️';
+    localStorage.setItem('ecoss-theme',next);
   }
 </script>
 </body>
